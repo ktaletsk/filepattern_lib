@@ -23,5 +23,4 @@ jobs:
     - uses: addnab/docker-run-action@v3
       with:
         image: filepattern:latest
-        options: -v ${{ github.workspace }}/:/work
         run: ./filepattern img_r0{yy}_c00{x+}.tif /work/Small_Fluorescent_Test_Dataset/image-tiles/
