@@ -27,4 +27,4 @@ jobs:
       with:
         image: filepattern:latest
         options: -v ${{ github.workspace }}:/work
-        run: ./filepattern img_r0{yy}_c00{x+}.tif /data/Small_Fluorescent_Test_Dataset/image-tiles/
+        run: ./filepattern img_r0{yy}_c00{x+}.tif /work/Small_Fluorescent_Test_Dataset/image-tiles/
