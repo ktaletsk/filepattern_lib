@@ -28,3 +28,25 @@ jobs:
         image: filepattern:latest
         options: -v ${{ github.workspace }}:/work
         run: ./filepattern img_r0{yy}_c00{x+}.tif /work/Small_Fluorescent_Test_Dataset/image-tiles/
+
+    - name: Generate large test data
+      run: |
+        mkdir tmp_data
+
+        for x in {1..1000}
+        do
+            for y in {1..1000}
+            do
+                for z in {1..3}
+                do
+                    touch tmp_data/data_${x}_${y}_${z}.tiff
+                done
+            done
+        done
+    
+    - name: Run large data test
+      uses: addnab/docker-run-action@v3
+      with:
+        image: filepattern:latest
+        options: -v ${{ github.workspace }}:/work
+        run: ./filepattern img_r0{yy}_c00{x+}.tif /work/tmp_data/
