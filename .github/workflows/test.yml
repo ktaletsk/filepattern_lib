@@ -15,9 +15,9 @@ jobs:
     steps:
     - uses: docker/build-push-action@v2.6.1
       with:
-        tags: test-image:latest
+        tags: filepattern:latest
         push: false
     - uses: addnab/docker-run-action@v3
       with:
-        image: test-image:latest
+        image: filepattern:latest
         run: echo "hello world"
