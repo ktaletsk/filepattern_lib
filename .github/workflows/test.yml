@@ -18,12 +18,7 @@ jobs:
       with:
         tags: filepattern:latest
         push: false
-    
-    - name: Download testing data
-    - run: |
-        wget https://github.com/USNISTGOV/MIST/wiki/testdata/Small_Fluorescent_Test_Dataset.zip
-        unzip Small_Fluorescent_Test_Dataset.zip
-    
+
     - name: Run test
     - uses: addnab/docker-run-action@v3
       with:
