@@ -29,13 +29,13 @@ jobs:
         options: -v ${{ github.workspace }}:/work
         run: ./filepattern img_r0{yy}_c00{x+}.tif /work/Small_Fluorescent_Test_Dataset/image-tiles/
 
-    - name: Generate large test data
+    - name: Generate 1M files data collection
       run: |
         mkdir tmp_data
-        dd if=/dev/urandom bs=1000 count=1000 | split -d -b 1 - tmp_data/file.
+        dd if=/dev/urandom bs=1000 count=1000 | split -a 6 -b 1 -d - tmp_data/file.
         ls tmp_data | wc -l
     
-    - name: Run large data test
+    - name: Parse 1M files data collection
       uses: addnab/docker-run-action@v3
       with:
         image: filepattern:latest
