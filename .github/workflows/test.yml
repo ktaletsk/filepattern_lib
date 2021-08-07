@@ -1,0 +1,43 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: docker/build-push-action@v2.6.1
+      with:
+        tags: filepattern:latest
+        push: false
+    
+    - name: Download small test data
+      run: |
+        wget https://github.com/USNISTGOV/MIST/wiki/testdata/Small_Fluorescent_Test_Dataset.zip
+        unzip Small_Fluorescent_Test_Dataset.zip
+    
+    - uses: addnab/docker-run-action@v3
+      with:
+        image: filepattern:latest
+        options: -v ${{ github.workspace }}:/work
+        run: ./filepattern img_r0{yy}_c00{x+}.tif /work/Small_Fluorescent_Test_Dataset/image-tiles/
+
+    - name: Generate 1M files data collection
+      run: |
+        mkdir tmp_data
+        dd if=/dev/urandom bs=1000 count=1000 | split -a 6 -b 1 -d - tmp_data/file.
+        ls tmp_data | wc -l
+    
+    - name: Parse 1M files data collection
+      uses: addnab/docker-run-action@v3
+      with:
+        image: filepattern:latest
+        options: -v ${{ github.workspace }}:/work
+        run: ./filepattern file.{x+} /work/tmp_data/
