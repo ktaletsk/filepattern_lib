@@ -40,4 +40,4 @@ jobs:
       with:
         image: filepattern:latest
         options: -v ${{ github.workspace }}:/work
-        run: ./filepattern img_r0{yy}_c00{x+}.tif /work/tmp_data/
+        run: ./filepattern file.{x+} /work/tmp_data/
