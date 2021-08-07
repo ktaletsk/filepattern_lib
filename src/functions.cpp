@@ -192,7 +192,7 @@ Status parse_directory_to_table(
   {
       std::cout << p.path() << '\n';
       auto r = parse_filename(p.path().filename().string(), regexp, variables);
-      print_parsed_helper(r);
+      // print_parsed_helper(r);
 
       ARROW_RETURN_NOT_OK(filename_builder.Append(p.path().string()));
       for (int i = 0; i < variables.size(); ++i) {

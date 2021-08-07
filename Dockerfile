@@ -24,8 +24,4 @@ COPY src /src
 RUN cmake /src && \
     make
 
-RUN wget https://github.com/USNISTGOV/MIST/wiki/testdata/Small_Fluorescent_Test_Dataset.zip && \
-    unzip Small_Fluorescent_Test_Dataset.zip -d /data && \
-    rm Small_Fluorescent_Test_Dataset.zip
-
-ENTRYPOINT ["./filepattern", "img_r0{yy}_c00{x+}.tif", "/data/Small_Fluorescent_Test_Dataset/image-tiles/"]
+ENTRYPOINT ["./filepattern"]

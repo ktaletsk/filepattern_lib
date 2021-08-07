@@ -17,8 +17,10 @@ This will install dependencies (CMake, Apache Arrow binaries), copy the sources,
 
 ## Run
 
+Prepare the data collection to parse in `<path_to_data>`, then run
+
 ```bash
-docker run filepattern
+docker run -v <path_to_data>:/data filepattern <filepattern> /data
 ```
 
-This will run filepattern on the test data with pattern `img_r0{yy}_c00{x+}.tif` and print out Arrow Table containing parsed test data
+This will run filepattern on the data collection with pattern `<filepattern>` and print out Arrow Table containing parsed test data
