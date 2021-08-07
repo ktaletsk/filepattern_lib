@@ -126,7 +126,7 @@ map<char, int> parse_filename(string file_name,
   smatch match;
 
   regex_search(file_name, match, var_regex);
-  cout << "match: " << match.str() << endl;
+  // cout << "match: " << match.str() << endl;
 
   // Check that the number of variables is the same as (the number of matches - 1)
   if (match.size() - 1 != variables.size()) {
