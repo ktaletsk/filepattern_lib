@@ -190,7 +190,7 @@ Status parse_directory_to_table(
   // Parse filenames in the directory and insert them into the builders
   for (auto &p : fs::directory_iterator(directory))
   {
-      std::cout << p.path() << '\n';
+      // std::cout << p.path() << '\n';
       auto r = parse_filename(p.path().filename().string(), regexp, variables);
       // print_parsed_helper(r);
 
