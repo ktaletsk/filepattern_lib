@@ -32,17 +32,8 @@ jobs:
     - name: Generate large test data
       run: |
         mkdir tmp_data
-
-        for x in {1..1000}
-        do
-            for y in {1..1000}
-            do
-                for z in {1..3}
-                do
-                    touch tmp_data/data_${x}_${y}_${z}.tiff
-                done
-            done
-        done
+        dd if=/dev/urandom bs=1000 count=1000 | split -d -b 1 - tmp_data/file.
+        ls tmp_data | wc -l
     
     - name: Run large data test
       uses: addnab/docker-run-action@v3
