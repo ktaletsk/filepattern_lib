@@ -31,13 +31,26 @@ jobs:
 
     - name: Generate 1M files data collection
       run: |
-        mkdir tmp_data
-        dd if=/dev/urandom bs=1000 count=1000 | split -a 6 -b 1 -d - tmp_data/file.
-        ls tmp_data | wc -l
+        mkdir 1M_data
+        dd if=/dev/urandom bs=1000 count=1000 | split -a 6 -b 1 -d - 1M_data/file.
+        ls 1M_data | wc -l
     
     - name: Parse 1M files data collection
       uses: addnab/docker-run-action@v3
       with:
         image: filepattern:latest
         options: -v ${{ github.workspace }}:/work
-        run: ./filepattern file.{x+} /work/tmp_data/
+        run: ./filepattern file.{x+} /work/1M_data/
+    
+    - name: Generate 10M files data collection
+      run: |
+        mkdir 10M_data
+        dd if=/dev/urandom bs=1000 count=10000 | split -a 7 -b 1 -d - 10M_data/file.
+        ls 10M_data | wc -l
+    
+    - name: Parse 10M files data collection
+      uses: addnab/docker-run-action@v3
+      with:
+        image: filepattern:latest
+        options: -v ${{ github.workspace }}:/work
+        run: ./filepattern file.{x+} /work/10M_data/
